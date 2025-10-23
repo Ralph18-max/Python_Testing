@@ -1,14 +1,28 @@
-{
-    "competitions": [
+{"competitions":[
         {
             "name": "Spring Festival",
             "date": "2020-03-27 10:00:00",
-            "numberOfPlaces": "25"
+            "numberOfPlaces": "10"
         },
         {
             "name": "Fall Classic",
             "date": "2020-10-22 13:30:00",
             "numberOfPlaces": "13"
+        },
+        {
+            "name": "IA COMPETITION",
+            "date": "2025-11-22 13:35:00",
+            "numberOfPlaces": "16"
+        },
+        {
+            "name": "LECTURE COMPETITION",
+            "date": "2025-10-30 16:00:00",
+            "numberOfPlaces": "12"
+        },
+        {
+            "name": "RIZZ COMPETITION",
+            "date": "2025-12-01 09:00:00",
+            "numberOfPlaces": "20"
         }
     ]
 }

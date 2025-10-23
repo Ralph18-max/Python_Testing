@@ -1,0 +1,76 @@
+/* Styles globaux */
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #f2f2f2;
+    color: #333;
+}
+
+h2, h3 {
+    color: #2c3e50;
+}
+
+a {
+    color: #3498db;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    background-color: #fff;
+    margin: 10px 0;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background: #ddd;
+    margin: 10px 0;
+}
+
+/* Messages flash */
+ul li.flash-message {
+    background-color: #ffe0e0;
+    color: #d8000c;
+}
+
+/* Bouton de réservation */
+button, input[type="submit"] {
+    background-color: #3498db;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 5px;
+}
+
+button:hover, input[type="submit"]:hover {
+    background-color: #2980b9;
+}
+
+form {
+    margin-top: 10px;
+}
+
+input[type="number"] {
+    padding: 5px;
+    width: 60px;
+    margin-right: 5px;
+}
+
+/* Points disponibles */
+p {
+    font-weight: bold;
+}

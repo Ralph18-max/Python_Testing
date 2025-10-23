@@ -4,33 +4,135 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Summary | GUDLFT Registration</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            margin: 0;
+        }
+
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            max-width: 800px;
+            margin: auto;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        h3 {
+            color: #444;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        .flash {
+            background-color: #ffe6e6;
+            color: #b30000;
+            border: 1px solid #ff9999;
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .logout {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: white;
+            background: #c33;
+            padding: 8px 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .logout:hover {
+            background: #a00;
+        }
+
+        .points {
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .competition-card {
+            background: #f8f8f8;
+            padding: 15px 20px;
+            margin-bottom: 15px;
+            border-radius: 12px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+
+        .competition-card a {
+            display: inline-block;
+            margin-top: 10px;
+            text-decoration: none;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .competition-card a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102,126,234,0.4);
+        }
+
+        hr {
+            border: 0.5px solid #ddd;
+            margin: 10px 0;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 30px 20px;
+            }
+        }
+    </style>
 </head>
 <body>
-        <h2>Welcome, {{club['email']}} </h2><a href="{{ url_for('logout') }}">Logout</a>
-    {% with messages = get_flashed_messages() %}
-    {% if messages %}
-        <ul>
-       {% for message in messages %}
-            <li>{{message}}</li>
-        {% endfor %}
-       </ul>
-    {% endif %}
-    Points available: {{club['points']}}
-    <h3>Competitions:</h3>
-    <ul>
-        {% for comp in competitions%}
-        <li>
-            {{comp['name']}}<br>
-            Date: {{comp['date']}}<br>
-            Number of Places: {{comp['numberOfPlaces']}}
-            {% if comp['numberOfPlaces']|int > 0 %}
-            <a href="{{ url_for('book',competition=comp['name'],club=club['name']) }}">Book Places</a>
-            {% endif %}
-        </li>
-       <hr>
-        {% endfor %}
-    </ul>
-    {% endwith %}
+    <div class="container">
 
+        <!-- Messages flash -->
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <div class="flash">
+              {% for message in messages %}
+                <p>{{ message }}</p>
+              {% endfor %}
+            </div>
+          {% endif %}
+        {% endwith %}
+
+        {% if club %}
+            <h2>Welcome, {{ club.get('email', 'Utilisateur inconnu') }}</h2>
+            <a class="logout" href="{{ url_for('logout') }}">Logout</a>
+            <p class="points">Points available: {{ club.get('points', 0) }}</p>
+        {% else %}
+            <h2>Bienvenue, utilisateur inconnu</h2>
+        {% endif %}
+
+        <h3>Competitions:</h3>
+        {% for comp in competitions %}
+            <div class="competition-card">
+                <strong>{{ comp.get('name', 'Nom inconnu') }}</strong><br>
+                Date: {{ comp.get('date', 'Date inconnue') }}<br>
+                Number of Places: {{ comp.get('numberOfPlaces', 0) }}<br>
+                {% if comp.get('numberOfPlaces', 0)|int > 0 and club %}
+                    <a href="{{ url_for('book', competition=comp.get('name',''), club=club.get('name','')) }}">Book Places</a>
+                {% endif %}
+            </div>
+        {% endfor %}
+
+    </div>
 </body>
 </html>
